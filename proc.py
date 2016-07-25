@@ -2,7 +2,7 @@ import sys
 
 def main():
 	if len(sys.argv) < 2:
-		print("Usage: python proc.py [meminfo] [loadavg] [-b] [-v]")
+		print("Usage: python proc.py [meminfo] [loadavg] [partitions] [-b] [-v]")
 		sys.exit()
 
 	if 'meminfo' in sys.argv:
@@ -59,9 +59,6 @@ def read_loadavg():
 			print("Argument not found. ")
 			read_loadavg()
 
-def read_stat():
-	pass
-
 def read_partitions():
 	if '-v' in sys.argv:
 		style = 'v'
@@ -73,7 +70,7 @@ def read_partitions():
 	with open('/proc/partitions', 'r') as partitions:		
 		if style == 'b':
 			data = partitions.readline().split(' ')
-			print('Name', '\t\t', 'Size', '\n', end='')
+			print('Partition', '\t\t', 'Size', '\n', end='')
 			for line in partitions:
 				try:
 					print(line.split(' ')[-1].strip('\n'), '\t\t',\
