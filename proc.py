@@ -47,14 +47,18 @@ def read_loadavg():
 		data = loadavg.readline().split(' ')
 
 		if style == 'b':
-			print("Processor average use (last 1 minute): {:.2f}%".format(float(data[0])*100))
+			output = "Processor average use (last 1 minute): {:.2f}%".format(float(data[0])*100)
+			print(output)
+			return float(output.split(':')[1].strip(' ').strip('%'))
+
 
 		elif style == 'v':
-			print("Processor use (last 1 min): {}%".format(float(data[0])*100))
-			print("Processor use (last 5 min): {}%".format(float(data[1])*100))
-			print("Processor use (last 10 min): {}%".format(float(data[2])*100))
+			print("Processor use (last 1 min): {:.2f}%".format(float(data[0])*100))
+			print("Processor use (last 5 min): {:.2f}%".format(float(data[1])*100))
+			print("Processor use (last 10 min): {:.2f}%".format(float(data[2])*100))
 			print("Processes running: {}".format(data[3]))
 			print("Processes total: {}".format(data[4]), end='')
+			return float(data[0])*100
 		else:
 			print("Argument not found. ")
 			read_loadavg()
