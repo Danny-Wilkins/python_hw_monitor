@@ -24,12 +24,28 @@ def read_meminfo():
 
 	with open('/proc/meminfo', 'r') as meminfo:
 		if style == 'b':
+			reading = []
 			for i in range(0,3):
-				print(meminfo.readline(), end='')
+				output = meminfo.readline()
+				s = ''
+				print(output, end='')
+				reading.append(s.join(char for char in output if char in '1234567890'))
+			return reading
+
 
 		elif style == 'v':
+			reading = []
+			
+			for i in range(0,3):
+				output = meminfo.readline()
+				s = ''
+				print(output, end='')
+				reading.append(s.join(char for char in output if char in '1234567890'))
+			
 			for line in meminfo:
 				print(line, end='')
+
+			return reading
 
 		else:
 			print("Argument not found. ")
